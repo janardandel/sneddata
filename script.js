@@ -18,13 +18,20 @@ function generateReport() {
     let reportMessage = `📢 Student Test Report\n📚 Subject: ${subject}\n\n`;
 
     students.forEach(line => {
-        let parts = line.split(/\t|,/); // Accepts both TAB (Excel) and COMMA
-        if (parts.length >= 3) { // Ensure there are at least 3 columns
+        // Auto-detect whether the data is tab-separated (from Sheets/Excel) or comma-separated
+        let parts;
+        if (line.includes("\t")) {
+            parts = line.split("\t"); // Split by TAB if detected
+        } else {
+            parts = line.split(","); // Otherwise, split by comma
+        }
+
+        if (parts.length >= 3) { // Ensure at least 3 columns (Name, Marks, Phone)
             let name = parts[0].trim();
             let marks = parts[1].trim();
             let phone = parts[2].trim();
 
-            if (phone.match(/^\d{10,}$/)) { // Validate phone number
+            if (phone.match(/^\d{10,}$/)) { // Validate phone number (10+ digits)
                 let message = `${reportMessage}👨‍🎓 ${name} - ${marks}/100\n`;
 
                 let whatsappURL = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
@@ -33,7 +40,7 @@ function generateReport() {
                 alert(`Invalid phone number for ${name}: ${phone}`);
             }
         } else {
-            alert(`Invalid format: ${line}`);
+            alert(`Invalid format detected in: ${line}`);
         }
     });
 }
