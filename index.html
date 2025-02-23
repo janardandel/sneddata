@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Report System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Student Report System</h1>
+        <p>Copy & paste student details, select a subject, and send reports via WhatsApp.</p>
+
+        <!-- Subject Selection -->
+        <label for="subject">Select Subject:</label>
+        <select id="subject">
+            <option value="Math">Math</option>
+            <option value="Science">Science</option>
+            <option value="English">English</option>
+            <option value="History">History</option>
+            <option value="Custom">Other (Enter Below)</option>
+        </select>
+        <input type="text" id="customSubject" placeholder="Enter subject name" style="display:none;">
+
+        <!-- Student Data Input -->
+        <label for="studentData">Paste Student Data (Name, Marks, WhatsApp Number):</label>
+        <textarea id="studentData" placeholder="Example:
+John Doe, 85, 911234567890
+Jane Smith, 78, 919876543210"></textarea>
+
+        <!-- Send Button -->
+        <button onclick="generateReport()">Generate & Send Report</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
